@@ -38,10 +38,12 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>신체 정보</Text>
           <StatCards />
         </View>
-        <View style={styles.section}>
+        <View style={[styles.section, { marginBottom: 16 }]}>
+          <Text style={styles.sectionTitle}>운동 통계</Text>
           <WeeklyStats />
         </View>
-        <View style={styles.section}>
+        <View style={[styles.section, { marginBottom: 0 }]}>
+          <Text style={styles.sectionTitle}>내 능력치</Text>
           <AbilityCards />
         </View>
       </View>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   greeting: { color: '#fff', fontSize: 20, fontWeight: '700', letterSpacing: -0.4 },
   body: { paddingHorizontal: Spacing.xl, marginTop: 0 },
   section: { marginBottom: 16 },
-  sectionTitle: { fontSize: 20, fontWeight: '700', color: '#353743', marginBottom: 6 },
+  sectionTitle: { fontSize: 20, fontWeight: '700', color: '#353743', marginBottom: 16 },
 });
 
 

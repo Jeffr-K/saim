@@ -14,7 +14,7 @@ export function WeeklyStats() {
   return (
     <View style={styles.wrapper}>
       <View style={styles.rowHeader}>
-        <Text style={styles.title}>운동 통계</Text>
+        {/* <Text style={styles.title}>운동 통계</Text> */}
       </View>
       <View style={styles.card}>
         <View style={styles.rowTop}>
@@ -35,7 +35,7 @@ export function WeeklyStats() {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { marginTop: 24 },
+  wrapper: {},
   rowHeader: { marginBottom: 6 },
   title: { fontSize: 20, fontWeight: '700', color: '#353743' },
   card: { backgroundColor: '#fff', borderRadius: 16, padding: 16 },

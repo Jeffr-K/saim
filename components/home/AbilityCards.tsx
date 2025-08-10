@@ -15,7 +15,7 @@ export function AbilityCards() {
   return (
     <View style={styles.wrapper}>
       {/* 섹션 타이틀은 카드 바깥 */}
-      <Text style={styles.title}>내 능력치</Text>
+      {/* <Text style={styles.title}>내 능력치</Text> */}
 
       {/* 차트와 하단 능력치가 들어가는 흰색 카드 */}
       <View style={styles.containerCard}>

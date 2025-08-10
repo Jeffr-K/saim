@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View, Text, StatusBar, Platform, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { TodayCard } from '@/components/home/TodayCard';
-import { RecentList } from '@/components/home/RecentList';
 import { fetchHomeMock, HomeData } from '@/api/mock/home';
 import { Spacing } from '@/design/tokens';
 import { useRouter } from 'expo-router';
@@ -17,8 +16,6 @@ export default function HomeScreen() {
   useEffect(() => {
     fetchHomeMock().then(setData);
   }, []);
-
-  const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 44 : StatusBar.currentHeight || 24;
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

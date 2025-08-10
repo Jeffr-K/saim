@@ -1,37 +1,42 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import { GoBackButton } from "@/components/button/GoBackButton";
-import { GoNextButton } from "@/components/button/GoNextButton";
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { GoNextButton } from '@/components/button/GoNextButton';
+import { OnboardingHeader } from '@/components/OnboardingHeader';
+import { useOnboardingStore } from '@/api/store/useOnboardingStore';
+import { useRouter } from 'expo-router';
+import { OnboardingLayout } from '@/components/OnboardingLayout';
 
 export default function WeightInputScreen() {
+  const router = useRouter();
+  const weight = useOnboardingStore((s) => s.weightKg);
+  const setWeight = useOnboardingStore((s) => s.setWeight);
+  const [local, setLocal] = useState(weight ? String(weight) : '');
+
   return (
-    <>
-      <GoBackButton title="몸무게 입력" />
+    <OnboardingLayout progress={4 / 7} header={<OnboardingHeader title="몸무게 입력" /> }>
+      <Text style={styles.title}>몸무게를 입력해주세요.</Text>
 
-      <View style={styles.container}>
-        <Text style={styles.title}>몸무게를 입력해주세요.</Text>
-
-        <View style={styles.row}>
-          <TextInput
-            style={styles.input}
-            placeholder="0"
-            keyboardType="numeric"
-            placeholderTextColor="#999"
-          />
-          <Text style={styles.unitText}>Kg</Text>
-        </View>
+      <View style={styles.row}>
+        <TextInput
+          style={styles.input}
+          placeholder="0"
+          keyboardType="numeric"
+          placeholderTextColor="#999"
+          value={local}
+          onChangeText={setLocal}
+        />
+        <Text style={styles.unitText}>Kg</Text>
       </View>
 
-      <GoNextButton onPress={() => alert("Next")} />
-    </>
+      <GoNextButton
+        disabled={!/^\d{2,3}$/.test(local)}
+        onPress={() => { setWeight(local ? Number(local) : null); router.push('/onboarding/Goal'); }}
+      />
+    </OnboardingLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
   title: {
     fontSize: 20,
     marginBottom: 20,

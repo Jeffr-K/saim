@@ -51,8 +51,15 @@ function RootLayoutNav() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
+          <Stack.Screen name="(screens)/onboarding/index" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Username" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Height" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Weight" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Goal" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Occupation" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Referral" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Complete" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="onboarding/Weight" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
       </ThemeProvider>

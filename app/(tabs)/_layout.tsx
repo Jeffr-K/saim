@@ -3,7 +3,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { SplashScreen, Tabs } from 'expo-router';
-import { TouchableOpacity, View, StyleSheet, Platform } from 'react-native';
+import { TouchableOpacity, View, StyleSheet, Platform, Text } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -80,35 +80,14 @@ function CustomTabBarButton(props: any & { routeName: string }) {
   return <TouchableOpacity {...(restProps as React.ComponentProps<typeof TouchableOpacity>)} />;
 }
 
-SplashScreen.preventAutoHideAsync();
+// 탭 레벨의 스플래시 제어는 제거하여 온보딩으로 자연 전환
+// SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const [appIsReady, setAppIsReady] = useState(false);
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
-  }, []);
-
-  useEffect(() => {
-    if (appIsReady) {
-      SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
-  }
+  // 탭 로드 지연 제거
 
   return (
     <Tabs
@@ -126,8 +105,19 @@ export default function TabLayout() {
       <Tabs.Screen
         name="Home"
         options={{
-          title: '홈',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} theme="feather" />,
+          headerShown: true,
+          title: '',
+          headerStyle: { backgroundColor: '#353743' },
+          headerTintColor: '#fff',
+          headerRight: () => (
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginRight: 20 }}>
+              <View style={{ backgroundColor: '#fff', borderRadius: 32, paddingHorizontal: 8, paddingVertical: 2 }}>
+                <Text style={{ color: '#567cf9', fontSize: 12, fontWeight: '500' }}>Pro</Text>
+              </View>
+              <Feather name="bell" size={24} color="#fff" />
+            </View>
+          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} theme="feather" />, 
         }}
       />
       <Tabs.Screen

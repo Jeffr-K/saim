@@ -6,35 +6,38 @@ import { useOnboardingStore } from '@/api/store/useOnboardingStore';
 import { OnboardingLayout } from '@/components/OnboardingLayout';
 
 const OPTIONS = [
-  { key: 'lose_weight', label: '체중 감량' },
-  { key: 'gain_muscle', label: '근육 증가' },
-  { key: 'stay_fit', label: '건강 관리' },
+  { key: 'app_store', label: '앱스토어' },
+  { key: 'friend', label: '지인 추천' },
+  { key: 'instagram', label: '인스타그램' },
+  { key: 'youtube', label: '유튜브' },
+  { key: 'search', label: '검색' },
+  { key: 'community', label: '커뮤니티' },
+  { key: 'etc', label: '기타' },
 ] as const;
 
-export default function GoalSelectScreen() {
+export default function ReferralScreen() {
   const router = useRouter();
-  const goal = useOnboardingStore((s) => s.goal);
-  const setGoal = useOnboardingStore((s) => s.setGoal);
+  const referral = useOnboardingStore((s) => s.referral);
+  const setReferral = useOnboardingStore((s) => s.setReferral);
 
   return (
-    <OnboardingLayout progress={5 / 7} header={<OnboardingHeader title="운동 목표" subtitle="원하시는 목표를 선택하세요" />}>
+    <OnboardingLayout progress={7 / 7} header={<OnboardingHeader title="SAIM을 어떻게 알게 되셨나요?" /> }>
       {OPTIONS.map((opt) => (
         <TouchableOpacity
           key={opt.key}
-          style={[styles.option, goal === opt.key && styles.optionActive]}
-          onPress={() => setGoal(opt.key)}
+          style={[styles.option, referral === opt.key && styles.optionActive]}
+          onPress={() => setReferral(opt.key)}
         >
-          <Text style={[styles.optionText, goal === opt.key && styles.optionTextActive]}>{opt.label}</Text>
+          <Text style={[styles.optionText, referral === opt.key && styles.optionTextActive]}>{opt.label}</Text>
         </TouchableOpacity>
       ))}
-
       <View style={styles.footer}>
         <TouchableOpacity
-          style={[styles.next, !goal && styles.nextDisabled]}
-          disabled={!goal}
-          onPress={() => router.push('/onboarding/Occupation')}
+          style={[styles.next, !referral && styles.nextDisabled]}
+          disabled={!referral}
+          onPress={() => router.push('/onboarding/Complete')}
         >
-          <Text style={styles.nextText}>다음</Text>
+          <Text style={styles.nextText}>완료</Text>
         </TouchableOpacity>
       </View>
     </OnboardingLayout>
@@ -59,3 +62,5 @@ const styles = StyleSheet.create({
   nextDisabled: { backgroundColor: '#bbb' },
   nextText: { color: '#fff', fontSize: 16, fontWeight: '700' },
 });
+
+

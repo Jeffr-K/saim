@@ -6,33 +6,34 @@ import { useOnboardingStore } from '@/api/store/useOnboardingStore';
 import { OnboardingLayout } from '@/components/OnboardingLayout';
 
 const OPTIONS = [
-  { key: 'lose_weight', label: '체중 감량' },
-  { key: 'gain_muscle', label: '근육 증가' },
-  { key: 'stay_fit', label: '건강 관리' },
+  { key: 'student', label: '학생' },
+  { key: 'office_worker', label: '회사원' },
+  { key: 'self_employed', label: '자영업' },
+  { key: 'freelancer', label: '프리랜서' },
+  { key: 'etc', label: '기타' },
 ] as const;
 
-export default function GoalSelectScreen() {
+export default function OccupationScreen() {
   const router = useRouter();
-  const goal = useOnboardingStore((s) => s.goal);
-  const setGoal = useOnboardingStore((s) => s.setGoal);
+  const occupation = useOnboardingStore((s) => s.occupation);
+  const setOccupation = useOnboardingStore((s) => s.setOccupation);
 
   return (
-    <OnboardingLayout progress={5 / 7} header={<OnboardingHeader title="운동 목표" subtitle="원하시는 목표를 선택하세요" />}>
+    <OnboardingLayout progress={6 / 7} header={<OnboardingHeader title="직업을 선택해주세요" /> }>
       {OPTIONS.map((opt) => (
         <TouchableOpacity
           key={opt.key}
-          style={[styles.option, goal === opt.key && styles.optionActive]}
-          onPress={() => setGoal(opt.key)}
+          style={[styles.option, occupation === opt.key && styles.optionActive]}
+          onPress={() => setOccupation(opt.key)}
         >
-          <Text style={[styles.optionText, goal === opt.key && styles.optionTextActive]}>{opt.label}</Text>
+          <Text style={[styles.optionText, occupation === opt.key && styles.optionTextActive]}>{opt.label}</Text>
         </TouchableOpacity>
       ))}
-
       <View style={styles.footer}>
         <TouchableOpacity
-          style={[styles.next, !goal && styles.nextDisabled]}
-          disabled={!goal}
-          onPress={() => router.push('/onboarding/Occupation')}
+          style={[styles.next, !occupation && styles.nextDisabled]}
+          disabled={!occupation}
+          onPress={() => router.push('/onboarding/Referral')}
         >
           <Text style={styles.nextText}>다음</Text>
         </TouchableOpacity>
@@ -59,3 +60,5 @@ const styles = StyleSheet.create({
   nextDisabled: { backgroundColor: '#bbb' },
   nextText: { color: '#fff', fontSize: 16, fontWeight: '700' },
 });
+
+

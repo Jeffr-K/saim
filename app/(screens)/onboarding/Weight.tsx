@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import GoBackButton from "@/components/button/GoBackButton";
+import { GoBackButton } from "@/components/button/GoBackButton";
 import { GoNextButton } from "@/components/button/GoNextButton";
 
 export default function WeightInputScreen() {

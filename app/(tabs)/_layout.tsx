@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Tabs } from 'expo-router';
+import { SplashScreen, Tabs } from 'expo-router';
 import { TouchableOpacity, View, StyleSheet, Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Text } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -82,11 +80,35 @@ function CustomTabBarButton(props: any & { routeName: string }) {
   return <TouchableOpacity {...(restProps as React.ComponentProps<typeof TouchableOpacity>)} />;
 }
 
-
+SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const navigation = useNavigation();
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  useEffect(() => {
+    if (appIsReady) {
+      SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
 
   return (
     <Tabs

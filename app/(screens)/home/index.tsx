@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, View, Text, StatusBar, Platform } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, StatusBar, Platform, TouchableOpacity } from 'react-native';
 import { TodayCard } from '@/components/home/TodayCard';
 import { RecentList } from '@/components/home/RecentList';
 import { fetchHomeMock, HomeData } from '@/api/mock/home';
@@ -8,6 +8,7 @@ import { useRouter } from 'expo-router';
 import { StatCards } from '@/components/home/StatCards';
 import { WeeklyStats } from '@/components/home/WeeklyStats';
 import { AbilityCards } from '@/components/home/AbilityCards';
+import Feather from '@expo/vector-icons/Feather';
 
 export default function HomeScreen() {
   const [data, setData] = useState<HomeData | null>(null);
@@ -35,7 +36,13 @@ export default function HomeScreen() {
           )}
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>신체 정보</Text>
+          <View style={styles.sectionTitleRow}>
+            <Text style={styles.sectionTitle}>신체 정보</Text>
+            <TouchableOpacity style={styles.editBtn} activeOpacity={0.7}>
+              <Text style={styles.editText}>수정하기</Text>
+              <Feather name="chevron-right" size={16} color="#9aa0b5" />
+            </TouchableOpacity>
+          </View>
           <StatCards />
         </View>
         <View style={[styles.section, { marginBottom: 16 }]}>
@@ -57,7 +64,10 @@ const styles = StyleSheet.create({
   greeting: { color: '#fff', fontSize: 20, fontWeight: '700', letterSpacing: -0.4 },
   body: { paddingHorizontal: Spacing.xl, marginTop: 0 },
   section: { marginBottom: 16 },
-  sectionTitle: { fontSize: 20, fontWeight: '700', color: '#353743', marginBottom: 16 },
+  sectionTitle: { fontSize: 20, fontWeight: '700', color: '#353743', marginBottom: 8, lineHeight: 28 },
+  sectionTitleRow: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 16, minHeight: 28 },
+  editBtn: { flexDirection: 'row', alignItems: 'baseline', gap: 2, marginTop: 0 },
+  editText: { color: '#9aa0b5', fontSize: 16, fontWeight: '500', marginRight: 2, lineHeight: 28 },
 });
 
 

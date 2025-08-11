@@ -80,14 +80,9 @@ function CustomTabBarButton(props: any & { routeName: string }) {
   return <TouchableOpacity {...(restProps as React.ComponentProps<typeof TouchableOpacity>)} />;
 }
 
-// 탭 레벨의 스플래시 제어는 제거하여 온보딩으로 자연 전환
-// SplashScreen.preventAutoHideAsync();
-
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const [appIsReady, setAppIsReady] = useState(false);
-
-  // 탭 로드 지연 제거
 
   return (
     <Tabs

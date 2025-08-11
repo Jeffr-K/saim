@@ -10,13 +10,7 @@ import { useColorScheme } from '@/components/useColorScheme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import StorybookUIRoot from '../.rnstorybook';
 
-export {
-  ErrorBoundary,
-} from 'expo-router';
-
-export const unstable_settings = {
-  initialRouteName: '(tabs)',
-};
+export { ErrorBoundary } from 'expo-router';
 
  // TODO: 환경 변수로 변경
 const SHOW_STORYBOOK = false;
@@ -51,12 +45,17 @@ function RootLayoutNav() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(screens)/onboarding/index" options={{ headerShown: false }} />
-          <Stack.Screen name="(screens)/onboarding/Username" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="(screens)/auth/Login" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="(screens)/onboarding/AITrainer" options={{ headerShown: true, header: undefined }} />
+          <Stack.Screen name="(screens)/onboarding/Username" options={{ headerShown: true, header: undefined }} />
           <Stack.Screen name="(screens)/onboarding/Height" options={{ headerShown: false }} />
           <Stack.Screen name="(screens)/onboarding/Weight" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/Gender" options={{ headerShown: true, header: undefined }} />
           <Stack.Screen name="(screens)/onboarding/Goal" options={{ headerShown: false }} />
-          <Stack.Screen name="(screens)/onboarding/Occupation" options={{ headerShown: false }} />
+          <Stack.Screen name="(screens)/onboarding/FrequencyInputScreen" options={{ headerShown: true, header: undefined }} />
+          <Stack.Screen name="(screens)/onboarding/Level" options={{ headerShown: true, header: undefined }} />
           <Stack.Screen name="(screens)/onboarding/Referral" options={{ headerShown: false }} />
           <Stack.Screen name="(screens)/onboarding/Complete" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

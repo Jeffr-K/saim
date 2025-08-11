@@ -4,6 +4,7 @@ import Feather from '@expo/vector-icons/Feather';
 import { Colors, Spacing, Typography } from '@/design/tokens';
 import { TodayWorkout } from '@/api/mock/home';
 
+// TODO: 데이터가 없을 경우 현재 UI | 데이터가 있을 경우 
 export function TodayCard(props: { data: TodayWorkout; onStart: () => void; onOpenCalendar?: () => void }) {
   const { data, onStart, onOpenCalendar } = props;
   if (data.status === 'none') {

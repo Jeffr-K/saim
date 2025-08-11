@@ -1,4 +1,3 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 import React, { useMemo, useRef } from 'react';
 import { Colors, Spacing, Typography } from '@/design/tokens';
@@ -20,32 +19,30 @@ export function GoNextButton(props: { onPress: () => void; disabled?: boolean; l
     { transform: [{ scale }] },
   ], [disabled, scale]);
 
+  // ❌ SafeAreaView를 제거하고 Animated.View가 최상위가 되도록 합니다.
+  // TODO: 이유가 뭐지
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <Animated.View style={containerStyle}>
-        <TouchableOpacity
-          style={StyleSheet.absoluteFill}
-          activeOpacity={0.7}
-          onPress={props.onPress}
-          disabled={disabled}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-        />
-        <Text style={styles.text}>{label}</Text>
-      </Animated.View>
-    </SafeAreaView>
+    <Animated.View style={containerStyle}>
+      <TouchableOpacity
+        style={StyleSheet.absoluteFill}
+        activeOpacity={0.7}
+        onPress={props.onPress}
+        disabled={disabled}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+      />
+      <Text style={styles.text}>{label}</Text>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, justifyContent: 'flex-end', alignItems: 'center', backgroundColor: Colors.background },
   button: {
     backgroundColor: Colors.primary,
-    width: '80%',
+    width: '100%', 
     paddingVertical: Spacing.md,
     borderRadius: 10,
-    alignItems: 'center',
-    marginBottom: Spacing.lg,
+    alignItems: 'center'
   },
   buttonDisabled: { backgroundColor: Colors.muted },
   text: {
@@ -53,4 +50,3 @@ const styles = StyleSheet.create({
     ...Typography.button,
   },
 });
-

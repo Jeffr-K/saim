@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useRouter } from 'expo-router';
 
 export function StatCards() {
+  const router = useRouter();
   const items = [
     { label: '체중', value: '70kg', icon: 'scale-bathroom' },
     { label: '체지방률', value: '18.5%', icon: 'percent' },
@@ -11,13 +13,13 @@ export function StatCards() {
   return (
     <View style={styles.row}>
       {items.map((it) => (
-        <View key={it.label} style={styles.card}>
+        <TouchableOpacity key={it.label} style={styles.card} onPress={() => router.push('/(screens)/Pro' as any)} activeOpacity={0.7}>
           <View style={styles.iconWrap}>
             <MaterialCommunityIcons name={it.icon as any} size={18} color="#ff9f7a" />
           </View>
           <Text style={styles.value}>{it.value}</Text>
           <Text style={styles.label}>{it.label}</Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );

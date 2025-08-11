@@ -1,28 +1,79 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { GoBackButton } from '@/components/button/GoBackButton';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { GoBackButton } from './button/GoBackButton';
+import { ProgressBar } from '@/design/bar/ProgressBar'; // ProgressBar를 import 합니다.
 
-export function OnboardingHeader(props: { title: string; subtitle?: string }) {
-  const { title, subtitle } = props;
+/**
+ * 온보딩 헤더
+ * @description 온보딩 시 ProgressBar 와 함께 뒤로가기 버튼과 title을 함께 표시하는 컴포넌트
+ * @param props
+ * @returns
+ */
+export function OnboardingHeader(props: {
+  title: string;
+  subtitle?: string;
+  progress?: number;
+  mainTitle?: string;
+  mainSubtitle?: string;
+}) {
+  const { title, subtitle, progress, mainTitle, mainSubtitle } = props;
+
   return (
-    <View style={styles.wrapper}>
-      <GoBackButton title={title} />
-      {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
-    </View>
+    <SafeAreaView style={styles.wrapper}>
+      {/* GoBackButton Section */}
+      <View style={styles.headerContent}>
+        <GoBackButton title={title} />
+        {subtitle ? <Text style={styles.subtitleText}>{subtitle}</Text> : null}
+      </View>
+      
+      {/* ProgrssBar Section */}
+      {progress !== undefined && (
+        <View style={styles.progressContainer}>
+          <ProgressBar progress={progress} />
+        </View>
+      )}
+
+      {/* MainTitle Section */}
+      {mainTitle && mainSubtitle && (
+        <View style={styles.mainTitleContainer}>
+          <Text style={styles.mainTitleText}>{mainTitle}</Text>
+          <Text style={styles.mainSubtitleText}>{mainSubtitle}</Text>
+        </View>
+      )}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingHorizontal: 20,
-    paddingTop: 8,
-    paddingBottom: 12,
     backgroundColor: '#fff',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#eee',
+    paddingBottom: 12,
   },
-  subtitle: {
+  headerContent: {
+    paddingHorizontal: 20,
+  },
+  progressContainer: {
+    paddingHorizontal: 20,
+      marginTop: 30,
+    },
+  subtitleText: {
     marginTop: 4,
     color: '#666',
   },
+  mainTitleContainer: {
+    paddingHorizontal: 20,
+    marginTop: 30,
+  },
+  mainTitleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 4,
+  },
+  mainSubtitleText: {
+    fontSize: 14,
+    color: '#666',
+  },
 });
-
-

@@ -16,4 +16,9 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
   },
+  brandColor: {
+    naver: '#03C75A',
+    kakao: '#FEE500',
+    google: '#FFFFFF',
+  }
 };

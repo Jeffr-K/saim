@@ -12,13 +12,14 @@ import StorybookUIRoot from '../.rnstorybook';
 
 export { ErrorBoundary } from 'expo-router';
 
- // TODO: 환경 변수로 변경
 const SHOW_STORYBOOK = false;
 
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
+    // 'Pretendard': require('../assets/fonts/Pretendard-Regular.ttf'),
+    // 'Pretendard-Bold': require('../assets/fonts/Pretendard-Bold.ttf'),
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
   });
@@ -44,20 +45,20 @@ function RootLayoutNav() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
+      <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(screens)/onboarding/index" options={{ headerShown: false }} />
-          {/* <Stack.Screen name="(screens)/auth/Login" options={{ headerShown: false }} /> */}
-          <Stack.Screen name="(screens)/onboarding/AITrainer" options={{ headerShown: true, header: undefined }} />
-          <Stack.Screen name="(screens)/onboarding/Username" options={{ headerShown: true, header: undefined }} />
-          <Stack.Screen name="(screens)/onboarding/Height" options={{ headerShown: false }} />
-          <Stack.Screen name="(screens)/onboarding/Weight" options={{ headerShown: false }} />
-          <Stack.Screen name="(screens)/onboarding/Gender" options={{ headerShown: true, header: undefined }} />
-          <Stack.Screen name="(screens)/onboarding/Goal" options={{ headerShown: false }} />
-          <Stack.Screen name="(screens)/onboarding/FrequencyInputScreen" options={{ headerShown: true, header: undefined }} />
-          <Stack.Screen name="(screens)/onboarding/Level" options={{ headerShown: true, header: undefined }} />
-          <Stack.Screen name="(screens)/onboarding/Referral" options={{ headerShown: false }} />
-          <Stack.Screen name="(screens)/onboarding/Complete" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding/index" options={{ headerShown: false }} />
+          <Stack.Screen name="auth/Login" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding/AITrainer" options={{ headerShown: true, header: undefined }} />
+          <Stack.Screen name="onboarding/Username" options={{ headerShown: true, header: undefined }} />
+          <Stack.Screen name="onboarding/Height" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding/Weight" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding/Gender" options={{ headerShown: true, header: undefined }} />
+          <Stack.Screen name="onboarding/Goal" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding/FrequencyInputScreen" options={{ headerShown: true, header: undefined }} />
+          <Stack.Screen name="onboarding/Level" options={{ headerShown: true, header: undefined }} />
+          <Stack.Screen name="onboarding/Referral" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding/Complete" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
